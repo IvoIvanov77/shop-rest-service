@@ -5,10 +5,12 @@
 package com.example.demo.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.service.ProductService;
 
 @Controller
+@RequestMapping("/products")
 public class ProductController
 {
     private final ProductService productService;
@@ -16,8 +18,7 @@ public class ProductController
     public ProductController(ProductService productService)
     {        
         this.productService = productService;
-    }
-    
+    }   
     
 
 }

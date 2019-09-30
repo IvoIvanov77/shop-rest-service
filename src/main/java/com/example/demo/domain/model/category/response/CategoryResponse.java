@@ -7,9 +7,23 @@ package com.example.demo.domain.model.category.response;
 
 public class CategoryResponse
 {
+    private Long id;
+
     private String name;
 
     private String imageUrl;
+
+
+    public Long getId()
+    {
+        return id;
+    }
+
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
 
     public String getName()
