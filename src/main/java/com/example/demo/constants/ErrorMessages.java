@@ -8,6 +8,8 @@ public final class ErrorMessages
     public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found.";
     
     public static final String CATEGORY_NOT_FOUND = "Category not found";
+    
+    public static final String PRODUCT_NOT_FOUND = "Product not found";
 
     public static final String PASSWORDS_DOES_NOT_MATCH_ERROR_MESSAGE = "Password and confirm password does not match";
 

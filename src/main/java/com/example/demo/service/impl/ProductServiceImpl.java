@@ -4,67 +4,98 @@
  */
 package com.example.demo.service.impl;
 
-import java.util.List;
 
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
+import com.example.demo.constants.ErrorMessages;
+import com.example.demo.domain.entities.Category;
+import com.example.demo.domain.entities.Product;
 import com.example.demo.domain.model.product.request.AddProductRequest;
 import com.example.demo.domain.model.product.request.AdvancedSearchRequest;
+import com.example.demo.domain.model.product.request.DeleteProducRequest;
 import com.example.demo.domain.model.product.request.EditProductRequest;
+import com.example.demo.domain.model.product.request.SearchProductByNameRequest;
 import com.example.demo.domain.model.product.response.ProductDetailsResponse;
 import com.example.demo.domain.model.product.response.ProductListItemResponse;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
+import com.example.demo.utils.DtoMapper;
+
 
 @Service
 public class ProductServiceImpl implements ProductService
 {
-    
+
     private final ProductRepository productRepository;
     
-    
+    private final CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository)
+    private final DtoMapper mapper;    
+
+
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository,
+            DtoMapper mapper)
     {        
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.mapper = mapper;
     }
 
-    @Override
-    public Resource<ProductDetailsResponse> get(Long id)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
-    public Resources<Resource<ProductListItemResponse>> getAll()
+    public ProductDetailsResponse get(Long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Product product = getById(id);
+        ProductDetailsResponse responseModel = mapper.map(product, ProductDetailsResponse.class);        
+        return responseModel;
     }
+
+
+    @Override
+    public List<ProductListItemResponse> getAll()
+    {
+        List<Product> allProducts = productRepository.findAll();
+        List<ProductListItemResponse> responceModels = mapper.map(allProducts, ProductListItemResponse.class)
+                .collect(Collectors.toList());
+        return responceModels;
+    }
+
 
     @Override
     public ProductDetailsResponse addProduct(AddProductRequest request)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Product product = mapper.map(request, Product.class);
+        Category category = categoryRepository.getOne(request.getCategoryId());
+        return saveProduct(product, category);
     }
+
 
     @Override
     public ProductDetailsResponse edit(EditProductRequest request)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Product productToEdit = getById(request.getId());
+
+        productToEdit.setName(request.getName());
+        productToEdit.setImageUrl(request.getImageUrl());
+        //TODO -other props
+        Category category = categoryRepository.getOne(request.getCategoryId());
+        
+        return saveProduct(productToEdit, category);
     }
 
     @Override
-    public ProductDetailsResponse delete(Long id)
+    public ProductDetailsResponse delete(DeleteProducRequest request)
     {
-        // TODO Auto-generated method stub
-        return null;
+        Product productToDelete = getById(request.getId());
+        productRepository.delete(productToDelete);
+        return mapper.map(productToDelete, ProductDetailsResponse.class);
     }
+
 
     @Override
     public List<ProductListItemResponse> advancedSearch(AdvancedSearchRequest request)
@@ -73,11 +104,26 @@ public class ProductServiceImpl implements ProductService
         return null;
     }
 
+
     @Override
-    public List<ProductListItemResponse> searchByName(String name)
+    public List<ProductListItemResponse> searchByName(SearchProductByNameRequest request)
     {
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    private Product getById(Long id)
+    {
+        return productRepository
+                .findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.PRODUCT_NOT_FOUND));
+    }
+
+
+    private ProductDetailsResponse saveProduct(Product product, Category category)
+    {
+        Product createdProduct = productRepository.save(product);
+        createdProduct.setCategory(category);
+        return mapper.map(createdProduct, ProductDetailsResponse.class);
     }
 
 }
