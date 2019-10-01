@@ -8,7 +8,7 @@ package com.example.demo.domain.model.product.request;
 import java.math.BigDecimal;
 
 
-public class AddProductRequest
+public class CreateProductRequest
 {
     private String name;
 

@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.model.product.request.AddProductRequest;
+import com.example.demo.domain.model.product.request.CreateProductRequest;
 import com.example.demo.domain.model.product.request.AdvancedSearchRequest;
 import com.example.demo.domain.model.product.request.DeleteProducRequest;
 import com.example.demo.domain.model.product.request.EditProductRequest;
@@ -18,7 +18,7 @@ public interface ProductService
     
     List<ProductListItemResponse> getProductsListByCategory(String categoryId);
 
-    ProductDetailsResponse addProduct(AddProductRequest request);
+    ProductDetailsResponse addProduct(CreateProductRequest request);
 
     ProductDetailsResponse edit(EditProductRequest request);
 

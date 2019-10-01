@@ -10,6 +10,8 @@ public final class ErrorMessages
     public static final String CATEGORY_NOT_FOUND = "Category not found";
     
     public static final String PRODUCT_NOT_FOUND = "Product not found";
+    
+    public static final String NOT_EXISTING_SHOPPING_CART = "Not existing shopping cart";
 
     public static final String PASSWORDS_DOES_NOT_MATCH_ERROR_MESSAGE = "Password and confirm password does not match";
 

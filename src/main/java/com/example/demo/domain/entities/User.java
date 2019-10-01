@@ -4,6 +4,8 @@ package com.example.demo.domain.entities;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,6 +23,12 @@ public class User extends BaseEntity implements UserDetails
     private String password;
 
     private Set<UserRole> authorities;
+
+    private ShoppingCart shoppingCart;
+
+    private List<Order> userOrders;
+
+    private List<UserAddress> userAddresses;
 
 
     @Override
@@ -77,6 +85,45 @@ public class User extends BaseEntity implements UserDetails
     public void setAuthorities(Set<UserRole> authorities)
     {
         this.authorities = authorities;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id", unique = true)
+    public ShoppingCart getShoppingCart()
+    {
+        return shoppingCart;
+    }
+
+
+    public void setShoppingCart(ShoppingCart shoppingCart)
+    {
+        this.shoppingCart = shoppingCart;
+    }
+
+
+    @OneToMany(mappedBy = "user")
+    public List<Order> getUserOrders()
+    {
+        return userOrders;
+    }
+
+
+    public void setUserOrders(List<Order> userOrders)
+    {
+        this.userOrders = userOrders;
+    }
+
+
+    @OneToMany(mappedBy = "user")
+    public List<UserAddress> getUserAddresses()
+    {
+        return userAddresses;
+    }
+
+
+    public void setUserAddresses(List<UserAddress> userAddresses)
+    {
+        this.userAddresses = userAddresses;
     }
 
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.constants.ErrorMessages;
 import com.example.demo.domain.entities.Category;
 import com.example.demo.domain.entities.Product;
-import com.example.demo.domain.model.product.request.AddProductRequest;
+import com.example.demo.domain.model.product.request.CreateProductRequest;
 import com.example.demo.domain.model.product.request.AdvancedSearchRequest;
 import com.example.demo.domain.model.product.request.DeleteProducRequest;
 import com.example.demo.domain.model.product.request.EditProductRequest;
@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService
 
 
     @Override
-    public ProductDetailsResponse addProduct(AddProductRequest request)
+    public ProductDetailsResponse addProduct(CreateProductRequest request)
     {
         Product product = mapper.map(request, Product.class);
         Category category = categoryRepository.getOne(request.getCategoryId());
