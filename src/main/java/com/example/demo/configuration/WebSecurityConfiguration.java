@@ -1,11 +1,9 @@
 package com.example.demo.configuration;
 
-import com.example.demo.configuration.component.jwt.JwtConfigurer;
 import com.example.demo.configuration.component.jwt.JwtTokenProvider;
 import com.example.demo.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,7 +21,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 
     private final BCryptPasswordEncoder passwordEncoder;
    
-    private final JwtTokenProvider jwtTokenProvider;
+//    private final JwtTokenProvider jwtTokenProvider;
     
     private final UserService userService;
 
@@ -32,7 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
     {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
-        this.jwtTokenProvider = jwtTokenProvider;
+//        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Bean

@@ -25,6 +25,7 @@ import com.example.demo.domain.model.category.request.CreateCategoryRequest;
 import com.example.demo.domain.model.category.request.DeleteCategoryRequest;
 import com.example.demo.domain.model.category.request.EditCategoryRequest;
 import com.example.demo.domain.model.category.request.SearchCategoryByNameRequest;
+import com.example.demo.domain.model.category.response.CategoryListItemResponse;
 import com.example.demo.domain.model.category.response.CategoryResponse;
 import com.example.demo.service.CategoryService;
 
@@ -60,10 +61,16 @@ public class CategoryController
         CategoryResponse responseModel = categoryService.getOneById(id);
         return getCategoryResource(responseModel);
     }
+    
+    @GetMapping("/list")
+    public List<CategoryListItemResponse> categoryList()
+    {
+        return categoryService.getCaregotyList();
+    }
 
 
     //TODO - Resources
-    @GetMapping("/search")
+    @PostMapping("/search")
     public List<CategoryResponse> searchList(@RequestBody SearchCategoryByNameRequest request)
     {
         return categoryService.searchByName(request);

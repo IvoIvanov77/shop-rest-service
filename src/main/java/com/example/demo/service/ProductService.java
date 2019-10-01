@@ -15,6 +15,8 @@ public interface ProductService
     ProductDetailsResponse get(String id);
 
     List<ProductListItemResponse> getAll();
+    
+    List<ProductListItemResponse> getProductsListByCategory(String categoryId);
 
     ProductDetailsResponse addProduct(AddProductRequest request);
 

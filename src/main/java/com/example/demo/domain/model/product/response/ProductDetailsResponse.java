@@ -4,7 +4,9 @@
  */
 package com.example.demo.domain.model.product.response;
 
+
 import java.math.BigDecimal;
+
 
 public class ProductDetailsResponse
 {
@@ -14,70 +16,96 @@ public class ProductDetailsResponse
 
     private String imageUrl;
 
-    private String category;
+    private String categoryName;
+
+    private String categoryId;
 
     private String description;
 
     private BigDecimal price;
 
-    public String getId() {
+
+    public String getId()
+    {
         return id;
     }
 
-    public void setId(String id) {
+
+    public void setId(String id)
+    {
         this.id = id;
     }
+
 
     public String getName()
     {
         return name;
     }
 
+
     public void setName(String name)
     {
         this.name = name;
     }
+
 
     public String getImageUrl()
     {
         return imageUrl;
     }
 
+
     public void setImageUrl(String imageUrl)
     {
         this.imageUrl = imageUrl;
     }
 
-    public String getCategory()
+
+    public String getCategoryName()
     {
-        return category;
+        return categoryName;
     }
 
-    public void setCategory(String category)
+
+    public void setCategoryName(String categoryName)
     {
-        this.category = category;
+        this.categoryName = categoryName;
     }
+
+
+    public String getCategoryId()
+    {
+        return categoryId;
+    }
+
+
+    public void setCategoryId(String categoryId)
+    {
+        this.categoryId = categoryId;
+    }
+
 
     public String getDescription()
     {
         return description;
     }
 
+
     public void setDescription(String description)
     {
         this.description = description;
     }
+
 
     public BigDecimal getPrice()
     {
         return price;
     }
 
+
     public void setPrice(BigDecimal price)
     {
         this.price = price;
     }
-
-    
 
 }

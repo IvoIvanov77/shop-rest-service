@@ -3,6 +3,7 @@ package com.example.demo.domain.entities;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ public class Category extends BaseEntity
     
     private Set<Product> products;
     
-
+    @Column(nullable = false, unique = true)
     public String getName()
     {
         return name;

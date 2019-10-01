@@ -5,6 +5,7 @@
 package com.example.demo.service.impl;
 
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import com.example.demo.domain.model.category.request.CreateCategoryRequest;
 import com.example.demo.domain.model.category.request.DeleteCategoryRequest;
 import com.example.demo.domain.model.category.request.EditCategoryRequest;
 import com.example.demo.domain.model.category.request.SearchCategoryByNameRequest;
+import com.example.demo.domain.model.category.response.CategoryListItemResponse;
 import com.example.demo.domain.model.category.response.CategoryResponse;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.CategoryRepository;
@@ -64,6 +66,18 @@ public class CategoryServiceImpl implements CategoryService
     {
         List<Category> allCategories = categoryRepository.findAll();
         List<CategoryResponse> responceModels = mapper.map(allCategories, CategoryResponse.class)
+                .sorted(Comparator.comparing(CategoryResponse::getId))
+                .collect(Collectors.toList());
+        return responceModels;
+    }
+    
+    @Override
+    public List<CategoryListItemResponse> getCaregotyList()
+    {
+        
+        List<Category> allCategories = categoryRepository.findAll();
+        List<CategoryListItemResponse> responceModels = mapper.map(allCategories, CategoryListItemResponse.class)
+                .sorted(Comparator.comparing(CategoryListItemResponse::getName))
                 .collect(Collectors.toList());
         return responceModels;
     }
@@ -125,5 +139,6 @@ public class CategoryServiceImpl implements CategoryService
         Category createdCategory = categoryRepository.save(category);
         return mapper.map(createdCategory, CategoryResponse.class);
     }
+   
 
 }

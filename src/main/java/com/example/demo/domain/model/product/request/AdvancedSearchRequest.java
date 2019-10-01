@@ -6,8 +6,6 @@ package com.example.demo.domain.model.product.request;
 
 import java.math.BigDecimal;
 
-import com.example.demo.domain.entities.Category;
-
 
 public class AdvancedSearchRequest
 {

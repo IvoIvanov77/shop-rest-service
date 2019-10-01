@@ -25,5 +25,11 @@ public interface ProductRepository extends JpaRepository<Product, String>
             "select p from Product p where p.name like concat('%',:name,'%') " +
             "order by p.name")
     List<Product> searchByName(@Param("name") String name);
+    
+    @Query("" +
+            "select p from Product p where " +
+            "p.category.id = :categoryId " +
+            "order by p.name")
+    List<Product> getByCategory(String categoryId);
 
 }

@@ -38,6 +38,17 @@ public class ProductController
         return new Resources<>(resourcesList,
                 linkTo(methodOn(this.getClass()).all()).withSelfRel());
     }
+    
+    @GetMapping(path = "by-category/{categoryId}", produces = "application/json")
+    public Resources<Resource<ProductListItemResponse>> productsByCategory(@PathVariable String categoryId)
+    {
+        List<ProductListItemResponse> allCategories = productService.getProductsListByCategory(categoryId);
+        List<Resource<ProductListItemResponse>> resourcesList = allCategories.stream()
+                .map(this::getProductResource)
+                .collect(Collectors.toList());
+        return new Resources<>(resourcesList,
+                linkTo(methodOn(this.getClass()).productsByCategory(categoryId)).withSelfRel());
+    }
 
 
     @GetMapping(path = "/{id}", produces = "application/json")
@@ -51,13 +62,13 @@ public class ProductController
 
 
     //TODO - Resources
-    @GetMapping("/search")
+    @PostMapping("/search")
     public List<ProductListItemResponse> searchByName(@RequestBody SearchProductByNameRequest request)
     {
         return productService.searchByName(request);
     }
 
-    @GetMapping("/advanced-search")
+    @PostMapping("/advanced-search")
     public List<ProductListItemResponse> advancedSearch(@RequestBody AdvancedSearchRequest request)
     {
         return productService.advancedSearch(request);
@@ -88,7 +99,7 @@ public class ProductController
     private Resource<ProductListItemResponse> getProductResource(ProductListItemResponse responseModel){
         return new Resource<>(responseModel,
                 linkTo(methodOn(this.getClass()).one(responseModel.getId())).withSelfRel(),
-                linkTo(methodOn(this.getClass()).all()).withRel("categories"));
+                linkTo(methodOn(this.getClass()).all()).withRel("all-products"));
     }
 
 }

@@ -64,6 +64,15 @@ public class ProductServiceImpl implements ProductService
                 .collect(Collectors.toList());
         return responceModels;
     }
+    
+    @Override
+    public List<ProductListItemResponse> getProductsListByCategory(String categoryId)
+    {
+        List<Product> resultList = productRepository.getByCategory(categoryId);
+        List<ProductListItemResponse> responceModels = mapper.map(resultList, ProductListItemResponse.class)
+                .collect(Collectors.toList());
+        return responceModels;
+    }
 
 
     @Override
@@ -82,7 +91,8 @@ public class ProductServiceImpl implements ProductService
 
         productToEdit.setName(request.getName());
         productToEdit.setImageUrl(request.getImageUrl());
-        //TODO -other props
+        productToEdit.setDescription(request.getDescription());
+        productToEdit.setPrice(request.getPrice());        
         Category category = categoryRepository.getOne(request.getCategoryId());
         
         return saveProduct(productToEdit, category);
@@ -128,9 +138,9 @@ public class ProductServiceImpl implements ProductService
 
     private ProductDetailsResponse saveProduct(Product product, Category category)
     {
-        Product createdProduct = productRepository.save(product);
-        createdProduct.setCategory(category);
+        product.setCategory(category);
+        Product createdProduct = productRepository.save(product);       
         return mapper.map(createdProduct, ProductDetailsResponse.class);
-    }
+    }    
 
 }
