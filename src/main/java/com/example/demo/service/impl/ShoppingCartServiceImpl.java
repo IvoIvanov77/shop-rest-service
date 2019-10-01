@@ -8,12 +8,10 @@ package com.example.demo.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.constants.ErrorMessages;
-import com.example.demo.domain.entities.Category;
 import com.example.demo.domain.entities.Product;
 import com.example.demo.domain.entities.ShopItem;
 import com.example.demo.domain.entities.ShoppingCart;
 import com.example.demo.domain.enums.ShopItemStatus;
-import com.example.demo.domain.model.product.response.ProductDetailsResponse;
 import com.example.demo.domain.model.shopping_cart.request.CreateShopItemRequest;
 import com.example.demo.domain.model.shopping_cart.response.ShopItemResponse;
 import com.example.demo.exception.ResourceNotFoundException;
