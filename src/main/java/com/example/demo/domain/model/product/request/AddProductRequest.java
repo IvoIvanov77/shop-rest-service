@@ -14,7 +14,7 @@ public class AddProductRequest
 
     private String imageUrl;
 
-    private Long categoryId;
+    private String categoryId;
 
     private String description;
 
@@ -45,13 +45,13 @@ public class AddProductRequest
     }
 
 
-    public Long getCategoryId()
+    public String getCategoryId()
     {
         return categoryId;
     }
 
 
-    public void setCategoryId(Long categoryId)
+    public void setCategoryId(String categoryId)
     {
         this.categoryId = categoryId;
     }

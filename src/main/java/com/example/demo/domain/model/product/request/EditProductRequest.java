@@ -10,30 +10,26 @@ import java.math.BigDecimal;
 
 public class EditProductRequest
 {
-    private Long id;
+    private String id;
 
     private String name;
 
     private String imageUrl;
 
-    private Long categoryId;
+    private String categoryId;
 
     private String description;
 
     private BigDecimal price;
 
 
-    public Long getId()
-    {
+    public String getId() {
         return id;
     }
 
-
-    public void setId(Long id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
-
 
     public String getName()
     {
@@ -59,17 +55,13 @@ public class EditProductRequest
     }
 
 
-    public Long getCategoryId()
-    {
+    public String getCategoryId() {
         return categoryId;
     }
 
-
-    public void setCategoryId(Long categoryId)
-    {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
-
 
     public String getDescription()
     {

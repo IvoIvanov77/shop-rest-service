@@ -49,15 +49,15 @@ public class CategoryController
         List<Resource<CategoryResponse>> resourcesList = allCategories.stream()
                 .map(this::getCategoryResource)
                 .collect(Collectors.toList());
-        return new Resources<Resource<CategoryResponse>>(resourcesList,  
-                linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+        return new Resources<>(resourcesList,
+                linkTo(methodOn(this.getClass()).all()).withSelfRel());
     }
 
 
     @GetMapping(path = "/{id}", produces = "application/json")
-    public Resource<CategoryResponse> one(@PathVariable Long id)
+    public Resource<CategoryResponse> one(@PathVariable String id)
     {
-        CategoryResponse responseModel = categoryService.get(id);
+        CategoryResponse responseModel = categoryService.getOneById(id);
         return getCategoryResource(responseModel);
     }
 

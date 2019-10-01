@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface InvalidTokenRepository extends JpaRepository<UserToken, Long>
+public interface InvalidTokenRepository extends JpaRepository<UserToken, String>
 {
-    @Query("select count(it)>0 from UserToken it where it.token = :token")
+    @Query("select count(it) > 0 from UserToken it where it.token = :token")
     boolean exist(@Param("token")String token);
 }

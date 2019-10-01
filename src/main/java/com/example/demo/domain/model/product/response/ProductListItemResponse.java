@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 public class ProductListItemResponse
 {
+    private String id;
 
     private String name;
 
@@ -17,6 +18,13 @@ public class ProductListItemResponse
 
     private BigDecimal price;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName()
     {

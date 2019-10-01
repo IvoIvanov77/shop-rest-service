@@ -41,13 +41,21 @@ public class CategoryServiceImpl implements CategoryService
 
 
     @Override
-    public CategoryResponse get(Long id)
+    public CategoryResponse getOneById(String id)
     {
         Category category = getById(id);
         CategoryResponse responseModel = mapper.map(category, CategoryResponse.class);
         System.out.println(responseModel);
         return responseModel;
+    }
 
+    @Override
+    public CategoryResponse getOneByName(String name)
+    {
+        Category category = getByName(name);
+        CategoryResponse responseModel = mapper.map(category, CategoryResponse.class);
+        System.out.println(responseModel);
+        return responseModel;
     }
 
 
@@ -99,10 +107,16 @@ public class CategoryServiceImpl implements CategoryService
     }
 
 
-    private Category getById(Long id)
+    private Category getById(String id)
     {
         return categoryRepository
                 .findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.CATEGORY_NOT_FOUND));
+    }
+
+    private Category getByName(String name)
+    {
+        return categoryRepository
+                .findByName(name).orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.CATEGORY_NOT_FOUND));
     }
 
 

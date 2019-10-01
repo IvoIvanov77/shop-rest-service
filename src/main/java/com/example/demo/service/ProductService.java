@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ProductService
 {
-    ProductDetailsResponse get(Long id);
+    ProductDetailsResponse get(String id);
 
     List<ProductListItemResponse> getAll();
 

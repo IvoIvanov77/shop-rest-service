@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService
 
 
     @Override
-    public ProductDetailsResponse get(Long id)
+    public ProductDetailsResponse get(String id)
     {
         Product product = getById(id);
         ProductDetailsResponse responseModel = mapper.map(product, ProductDetailsResponse.class);        
@@ -100,19 +100,26 @@ public class ProductServiceImpl implements ProductService
     @Override
     public List<ProductListItemResponse> advancedSearch(AdvancedSearchRequest request)
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<Product> resultList = productRepository.search(
+                request.getName(),
+                request.getCategory(),
+                request.getMinPrice(),
+                request.getMaxPrice()
+        );
+        return mapper.map(resultList, ProductListItemResponse.class)
+                .collect(Collectors.toList());
     }
 
 
     @Override
     public List<ProductListItemResponse> searchByName(SearchProductByNameRequest request)
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<Product> resultList = productRepository.searchByName(request.getName());
+        return mapper.map(resultList, ProductListItemResponse.class)
+                .collect(Collectors.toList());
     }
     
-    private Product getById(Long id)
+    private Product getById(String id)
     {
         return productRepository
                 .findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.PRODUCT_NOT_FOUND));

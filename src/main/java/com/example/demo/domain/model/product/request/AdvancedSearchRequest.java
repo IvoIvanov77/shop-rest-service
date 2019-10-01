@@ -13,7 +13,7 @@ public class AdvancedSearchRequest
 {
     private String name;
 
-    private Category category;
+    private String category;
 
     private BigDecimal minPrice;
 
@@ -31,18 +31,13 @@ public class AdvancedSearchRequest
         this.name = name;
     }
 
-
-    public Category getCategory()
-    {
+    public String getCategory() {
         return category;
     }
 
-
-    public void setCategory(Category category)
-    {
+    public void setCategory(String category) {
         this.category = category;
     }
-
 
     public BigDecimal getMinPrice()
     {

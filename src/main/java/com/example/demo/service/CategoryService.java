@@ -10,7 +10,10 @@ import java.util.List;
 
 public interface CategoryService
 {
-    CategoryResponse get(Long id);
+
+    CategoryResponse getOneById(String id);
+
+    CategoryResponse getOneByName(String name);
 
     List<CategoryResponse> getAll();
 
