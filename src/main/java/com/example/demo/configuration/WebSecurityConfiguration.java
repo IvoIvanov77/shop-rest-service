@@ -18,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
-
     private final BCryptPasswordEncoder passwordEncoder;
    
 //    private final JwtTokenProvider jwtTokenProvider;
